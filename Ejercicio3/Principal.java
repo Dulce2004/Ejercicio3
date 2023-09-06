@@ -1,13 +1,21 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Esta clase es donde se crea la vista para el usuario
+ * 
+ * @author: Dulce Ambrosio
+ * @version: 06/09/2023
+ */
 public class Principal {
-
+    /**
+     * Método para llamar a las otras clases
+     */
     public static void main(String[] args) {
         Universidad universidad = new Universidad(new ArrayList<>());
         Scanner teclado = new Scanner(System.in);
 
-        while (true) {
+        while (true) { // se crea el menú
             System.out.println("-------------------------------");
             System.out.println("MENÚ PRINCIPAL");
             System.out.println("1. Agregar una sede");
@@ -20,7 +28,7 @@ public class Principal {
             int opcion = teclado.nextInt();
             teclado.nextLine();
 
-            switch (opcion) {
+            switch (opcion) { // se piden y se leen los datos de las sedes
                 case 1:
                     System.out.println("Ingrese los datos de la sede: ");
                     System.out.print("Lugar de la sede: ");
@@ -32,7 +40,7 @@ public class Principal {
                     universidad.agregarSede(nuevaSede);
                     System.out.println("La nueva sede se ha creado");
                     break;
-                case 2:
+                case 2:// se piden y se leen los datos de los estudiantes
                     System.out.println("------------------------------------------");
                     System.out.println("Ingrese los siguientes datos del estudiante: ");
                     System.out.print("Nombre: ");
@@ -51,24 +59,23 @@ public class Principal {
                             new ArrayList<>());
 
                     System.out.print("Materia del examen realizado: ");
-                    String materiaEstu = teclado.nextLine();
+                    String materiaEstu = teclado.nextLine(); // se agregan a las listas
                     System.out.print("Nota del examen realizado: ");
-                    double notaEstu = teclado.nextDouble();
+                    double notaEstu = teclado.nextDouble();// se agregan a las listas
 
                     Resultado resultado = new Resultado(materiaEstu, notaEstu);
-                    estudiante.AgregarMateria(resultado);
+                    estudiante.AgregarMateria(resultado);// se agregan a las listas
 
-                    // Encuentra la sede correspondiente y agrega el estudiante
                     for (Sede sede : universidad.getSedes()) {
                         if (sede.getNuevaSede().equals(sedeEstu)) {
                             sede.registrarEstudiante(estudiante);
-                            break;
+                            break;// se agregan a las listas
                         }
                     }
 
                     System.out.println("Estudiante ingresado de manera correcta :)");
                     break;
-                case 3:
+                case 3: // ciclo para mostrar las sedes y datos analiticos
                     universidad.mostrarSedes();
                     for (Sede sede : universidad.getSedes()) {
                         sede.mostrarEstudiantes();
@@ -90,7 +97,6 @@ public class Principal {
                                     double nota = resultados.getNota();
                                     notas.add(nota);
 
-                                    // Actualizar la nota más alta y la nota más baja
                                     if (nota > notaMasAlta) {
                                         notaMasAlta = nota;
                                     }
@@ -139,6 +145,9 @@ public class Principal {
 
     }
 
+    /**
+     * Método para calcular el promedio
+     */
     private static double calcularPromedio(ArrayList<Double> notas) {
         double suma = 0.0;
         for (double nota : notas) {
@@ -147,6 +156,9 @@ public class Principal {
         return suma / notas.size();
     }
 
+    /**
+     * Método para calcular la mediana
+     */
     private static double calcularMediana(ArrayList<Double> notas) {
         int n = notas.size();
         notas.sort(Double::compareTo);
@@ -159,6 +171,9 @@ public class Principal {
         }
     }
 
+    /**
+     * Método para calcular la moda
+     */
     private static double calcularModa(ArrayList<Double> notas) {
         double moda = 0.0;
         int maxCount = 0;
@@ -179,6 +194,9 @@ public class Principal {
         return moda;
     }
 
+    /**
+     * Método para calcular la desviación estandar
+     */
     private static double calcularDesviacionEstandar(ArrayList<Double> notas, double promedio) {
         double sumatoriaDiferencias = 0.0;
         for (double nota : notas) {
